@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'home_screen.dart';
-import 'register_screen.dart';
 import 'complaint_screen.dart';
 import 'map_screen.dart';
 import 'chatbot_screen.dart';
@@ -19,9 +18,8 @@ class _RootScreenState extends State<RootScreen> {
   bool _fingerprintEnabled = false;
 
   // List of pages for the bottom nav bar
-  final List<Widget> _screens = const [
+  final List<Widget> _screens = [
     HomeScreen(),
-    RegisterScreen(),
     ComplaintScreen(),
     MapScreen(),
     ChatbotScreen(),
@@ -45,10 +43,7 @@ class _RootScreenState extends State<RootScreen> {
             : 'Fingerprint login disabled'),
       ),
     );
-
-    // In a real app, store this in SharedPreferences or a similar
-    // persistent store, so that on the next login,
-    // your LoginScreen knows to show "Login with Fingerprint".
+    // In a real app, store this in SharedPreferences or similar.
   }
 
   @override
@@ -62,7 +57,6 @@ class _RootScreenState extends State<RootScreen> {
               if (value == 'fingerprint') {
                 _toggleFingerprintLogin();
               }
-              // You could add more items: e.g., 'profile', 'logout', etc.
             },
             itemBuilder: (BuildContext context) {
               return [
@@ -84,7 +78,7 @@ class _RootScreenState extends State<RootScreen> {
           ),
         ],
       ),
-      body: _screens[_selectedIndex],
+      body: _screens[_selectedIndex], // Dynamically switch between screens
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: _selectedIndex,
@@ -94,10 +88,7 @@ class _RootScreenState extends State<RootScreen> {
             icon: Icon(Icons.home),
             label: 'Home',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.app_registration),
-            label: 'Register',
-          ),
+          // Removed the Register icon
           BottomNavigationBarItem(
             icon: Icon(Icons.assignment),
             label: 'Complaint',
